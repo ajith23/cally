@@ -1,21 +1,21 @@
 const MONTH = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
 const WEEKDAY = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ];
 const YEAR = 2021;
-const ROOM_COUNT = 3;
+const ITEM_COUNT = 3;
 
-function buildRoomTable(roomCount) {
+function buildItemTable(itemCount) {
   var table = document.createElement('table');
-  for (let index = 0; index < roomCount; index++) {
+  for (let index = 0; index < itemCount; index++) {
     var row = document.createElement('tr');
     var cell = document.createElement('td');
     cell.innerHTML = index+1;
-    cell.classList.add('room-cell');
-    if(index == roomCount - 1)
-      cell.classList.add('room-cell-last');
+    cell.classList.add('item-cell');
+    if(index == itemCount - 1)
+      cell.classList.add('item-cell-last');
     row.appendChild(cell);
     table.appendChild(row);
   }
-  table.classList.add('room-table');
+  table.classList.add('item-table');
   return table;
 }
 
@@ -67,7 +67,7 @@ function appendMonthBody(table, year, month) {
         var cell = document.createElement('td');
         cell.classList.add('date');
         cell.appendChild(buildDateText(date));
-        cell.appendChild(buildRoomTable(roomCount || ROOM_COUNT));
+        cell.appendChild(buildItemTable(itemCount || ITEM_COUNT));
         row.appendChild(cell);
         date++;
       }
@@ -82,17 +82,17 @@ function buildPageBreak() {
   return para;
 }
 
-function buildTableFooter(year, companyName) {
+function buildTableFooter(footerText) {
   var row = document.createElement('tr');
   var cell = document.createElement('td');
   cell.colSpan = 7;
-  cell.innerHTML = companyName ? companyName + " &copy; " + year : year;
+  cell.innerHTML = footerText;
   cell.classList.add('footer');
   row.appendChild(cell);
   return row;
 }
 
-function buildMonthlyTable(year, companyName) {
+function buildMonthlyTable(year, footerText) {
   var container = document.getElementById('container');
   for (let index = 0; index < 12; index++) {
     var table = document.createElement('table');
@@ -106,9 +106,11 @@ function buildMonthlyTable(year, companyName) {
     appendMonthBody(tableBody, year, index);
     table.appendChild(tableBody);
     
-    var tableFoot = document.createElement('tfoot');
-    tableFoot.appendChild(buildTableFooter(year, companyName));
-    table.appendChild(tableFoot);
+    if(footerText) {
+      var tableFoot = document.createElement('tfoot');
+      tableFoot.appendChild(buildTableFooter(footerText));
+      table.appendChild(tableFoot);
+    }
 
     container.appendChild(table);
     container.appendChild(buildPageBreak());
@@ -126,6 +128,6 @@ function getParameterByName(name, url) {
 }
 
 const year = getParameterByName("year", location.href)
-const roomCount = getParameterByName("room_count", location.href)
-const companyName = getParameterByName("company", location.href)
-buildMonthlyTable(year || YEAR, companyName);
+const itemCount = getParameterByName("item_count", location.href)
+const footerText = getParameterByName("footer", location.href)
+buildMonthlyTable(year || YEAR, footerText);
