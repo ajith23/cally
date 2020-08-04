@@ -1,0 +1,71 @@
+<html>
+  <head>
+    <title>Calendar</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      table {
+        border-collapse: collapse;
+      }
+      td,th {
+        border: 1px solid #777777;
+      }
+      .footer {
+        width: 100%;
+        border: 1px solid #777777;
+        text-align: center;
+        color: gray;
+        font-size: 10px;
+      }
+      .date {
+        width: 130px;
+        height: 107px;
+        padding: 5px;
+      }
+      .month {
+        padding: 5px;
+        text-align: center;
+        font-size: large;
+        font-weight: 600;
+      }
+      .weekday {
+        padding: 5px;
+        text-align: center;
+        background-color: #aaaaaa;
+      }
+      .room-cell {
+        height: 26px;
+        border: 0px;
+        border-bottom: 1px solid #000;
+        font-size: small;
+        width: 120px;
+      }
+      .room-cell-last {
+        border-bottom: 0px solid #000;
+      }
+
+      .room-table {
+        margin-left: 5px;
+      }
+      .date-text {
+        font-weight: 800;
+      }
+
+      td:first-child.date {
+        background-color: #eeeeee;
+      }
+      td:last-child.date {
+        background-color: #eeeeee;
+      }
+      tr {
+        page-break-inside: avoid;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='container'>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
